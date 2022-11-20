@@ -1,0 +1,1 @@
+﻿#include "../Public/TJACourse.h"

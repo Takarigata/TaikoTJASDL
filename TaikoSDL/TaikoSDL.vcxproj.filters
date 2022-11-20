@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\CoreGameFramework">
+      <UniqueIdentifier>{d6d2bc07-8d53-4397-8b6f-26d04b0367c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CoreGameFramework\Public">
+      <UniqueIdentifier>{50163637-4c09-4867-8259-6ee052d65751}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CoreGameFramework\Private">
+      <UniqueIdentifier>{7a9597bc-18a1-4a9d-b4f0-3ea3f7611d00}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GameFramework\Private\Game.cpp">
+      <Filter>Source Files\CoreGameFramework\Private</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Sources\GameFramework\Public\Game.h">
+      <Filter>Source Files\CoreGameFramework\Public</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
