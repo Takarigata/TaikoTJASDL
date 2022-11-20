@@ -5,19 +5,55 @@
 
 void TJAMap::ParseTJAData(list<string> InData)
 {
+    //Parsing bool value
     bool HasParseSongMetaData = false;
+    bool IsParsingCourse = false;
+    
     for(int i = 0; i <= InData.size() - 1; i++)
     {
         auto it = InData.begin();
         advance(it, i);
 
-        if(it->length() > 0 && !HasParseSongMetaData)
+        if(it->length() > 0)
         {
-            if(it->find("COURSE:") != string::npos)
+            //ParseSongMetadata
+            if(it->find("COURSE:") != string::npos || IsParsingCourse)
             {
+                TJACourse* CurrentCourse = nullptr;
                 HasParseSongMetaData = true;
+                IsParsingCourse = true;
+                
+                std::cout << "cOURSE " << *it << std::endl;
+                if(it->find("COURSE:") != string::npos)
+                {
+                    CurrentCourse = new TJACourse();
+                    CurrentCourse->Difficulty = TJAPARSER::StringToDifficulty(*it);
+                }
+                
+                if(it->find("LEVEL:") != string::npos)
+                {
+                    if(CurrentCourse != nullptr)
+                    {
+                        TJAPARSER::ParseTJAValue(*it, CurrentCourse->CourseLevel);
+                    }
+                }
+                
+                if(it->find("LEVEL:") != string::npos)
+                {
+                    if(CurrentCourse != nullptr)
+                    {
+                        TJAPARSER::ParseTJAValue(*it, CurrentCourse->CourseLevel);
+                    }
+                }
+                
+                if(it->find("#END") != string::npos)
+                {
+                    IsParsingCourse = false;
+                    TJACourses.push_back(CurrentCourse);
+                }
             }
             
+            //Parse Song MetaData
             if(it->find("TITLE:") != string::npos && SongTitle.length() == 0)
             {
                 TJAPARSER::ParseTJAValue(*it, SongTitle);
@@ -71,7 +107,12 @@ void TJAMap::ParseTJAData(list<string> InData)
                 TJAPARSER::ParseTJAValue(*it, ScoreMode);
                 std::cout << "SCOREMODE = " << ScoreMode << std::endl;
             }
+
+            if(it->find("GENRE:")!= string::npos)
+            {
+                TJAPARSER::ParseTJAValue(*it, Genre);
+                std::cout << "GENRE = " << Genre << std::endl;
+            }
         }
-        
     }
 }

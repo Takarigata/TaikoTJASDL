@@ -1,5 +1,9 @@
 #include "../Public/TJAParser.h"
 
+#include <fstream>
+#include <iostream>
+#include <codecvt>
+
 namespace TJAPARSER {
 
 
@@ -17,6 +21,12 @@ void PrintTJA(int flag)
 	TJAMap* TJAParserLib::ParseTJAFile(string TJAFilePath)
 	{
 		TJAMap* OutTJAMap = new TJAMap();
+		std::wifstream wif(TJAFilePath);
+		wif.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
+		wstringstream wss;
+		wss << wif.rdbuf();
+		
+		std::wcout << "encoded UTF 8" << wss.str() << endl;
 		fstream TJAFileStream;
 		list<string> TJAData;
 		TJAFileStream.open(TJAFilePath, ios::in);
@@ -28,12 +38,11 @@ void PrintTJA(int flag)
 				//cout << CurrentLine << endl;
 				TJAData.push_back(CurrentLine);
 			}
-			OutTJAMap->ParseTJAData(TJAData);
+			//OutTJAMap->ParseTJAData(TJAData);
 		}
 	
 		return OutTJAMap;
 	}
-
-
+	
 
 }

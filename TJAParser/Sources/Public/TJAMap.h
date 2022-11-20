@@ -34,7 +34,9 @@ class TJAMap
 
         int ScoreMode;
 
-        vector<TJACourse> TJACourses;
+        string Genre;
+
+        vector<TJACourse*> TJACourses;
         //----------------------------
 
         //Parsing Function

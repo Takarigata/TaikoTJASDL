@@ -40,14 +40,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     }
 
     TJAPARSER::TJAParserLib* ParserLib = new TJAPARSER::TJAParserLib();
-    ParserLib->ParseTJAFile("C:\\DEV\\Bluebird.tja");
+    ParserLib->ParseTJAFile("C:\\DEV\\PARADOX.tja");
 }
 
 void Game::update()
 {
     cnt++;
-    //std::cout << cnt << std::endl;
-    //TJAPARSER::PrintTJA(cnt);
 }
 
 void Game::render()
