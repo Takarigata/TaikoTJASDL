@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <list>
 #include <string>
+#include <cstdlib>
 #include "../Public/TJAUtility.h"
 
 using namespace std;
@@ -23,4 +24,6 @@ class TJACourse
         int CourseScoreDiff;
 
         list<string> CourseData;
+
+    void CreateRandomData(int diff);
 };

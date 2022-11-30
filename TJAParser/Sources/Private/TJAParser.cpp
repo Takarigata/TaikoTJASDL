@@ -4,6 +4,12 @@
 #include <iostream>
 #include <codecvt>
 
+#include<stdio.h>
+#include<windows.h>
+#include <cstdio>
+#include <windows.h>
+
+
 namespace TJAPARSER {
 
 
@@ -20,13 +26,16 @@ void PrintTJA(int flag)
 
 	TJAMap* TJAParserLib::ParseTJAFile(string TJAFilePath)
 	{
+		SetConsoleOutputCP(CP_UTF8);
+		SetConsoleCP(CP_UTF8);
 		TJAMap* OutTJAMap = new TJAMap();
+		SetConsoleOutputCP( 65001 );
+	
 		std::wifstream wif(TJAFilePath);
 		wif.imbue(std::locale(std::locale::empty(), new std::codecvt_utf8<wchar_t>));
 		wstringstream wss;
 		wss << wif.rdbuf();
-		
-		std::wcout << "encoded UTF 8" << wss.str() << endl;
+	
 		fstream TJAFileStream;
 		list<string> TJAData;
 		TJAFileStream.open(TJAFilePath, ios::in);
@@ -35,10 +44,8 @@ void PrintTJA(int flag)
 			string CurrentLine;
 			while(getline(TJAFileStream, CurrentLine))
 			{
-				//cout << CurrentLine << endl;
 				TJAData.push_back(CurrentLine);
 			}
-			//OutTJAMap->ParseTJAData(TJAData);
 		}
 	
 		return OutTJAMap;

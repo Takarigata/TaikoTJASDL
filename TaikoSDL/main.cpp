@@ -1,20 +1,31 @@
 #include "Sources/GameFramework/Public/Game.h"
+#include "Sources/GameFramework/Public/GameSFML.h"
+#include "Sources/EngineFramework/Subsystem/Public/BaseEngineSubsystem.h"
 
-Game *game = nullptr;
+
+GameSFML *gameSFML = nullptr;
+BaseEngineSubsystem* Engine = nullptr;
 int main(int argc, char* argv[])
 {
-	game = new Game();
+	gameSFML = new GameSFML();
 	
-	game->init("Taiko SDK", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800 , 800, false);
-	
-	while(game->running())
+	gameSFML->init("Taiko SDK", 1920 , 1080, false);
+	Engine = BaseEngineSubsystem::GetInstance();
+
+	BaseEngineSubsystem* En = BaseEngineSubsystem::GetInstance();
+	if(En)
 	{
-		game->handleEvents();
-		game->update();
-		game->render();
+		En->printSub();
 	}
 	
-	game->clean();
+	while(gameSFML->running())
+	{
+		gameSFML->handleEvents();
+		gameSFML->update();
+		gameSFML->render();
+	}
+	
+	gameSFML->clean();
 	
 	return 0;
 }

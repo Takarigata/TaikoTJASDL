@@ -116,3 +116,27 @@ void TJAMap::ParseTJAData(list<string> InData)
         }
     }
 }
+
+void TJAMap::CreateRandomData()
+{
+    SongTitle = "Song Name";
+    SongTitle.append(std::to_string(rand()));
+    SongOffset = rand();
+    Subtitle = "Subtitle";
+    BaseSongBPM = rand();
+    AudioFile = "song.ogg";
+    SongVolume = rand();
+    SeVolume = rand();
+    DemoStart = rand();
+    ScoreMode = rand();
+    Genre = "Pute";
+    
+    for(int i = 0; i < 4; i++)
+    {
+        TJACourse* Tmp_Course = new TJACourse();
+        Tmp_Course->CreateRandomData(i);
+        TJACourses.push_back(Tmp_Course);
+    }
+    
+}
+

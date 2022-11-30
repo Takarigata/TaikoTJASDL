@@ -18,6 +18,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
+        TTF_Init();
         std::cout << "Subsystems Init..." << std::endl;
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
         if(window)
@@ -29,6 +30,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         if(renderer)
         {
             SDL_SetRenderDrawColor(renderer, 255,0,255,255);
+            TTF_Font * font = TTF_OpenFont("arial.ttf", 25);
+            SDL_Color color = { 255, 255, 255 };
+            SDL_Surface * surface = TTF_RenderText_Solid(font, "Welcome to Prout Labs アニメ", color);
+            SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
+            TexToRender.push_back(texture);
+            
             std::cout << "Renderer Created" << std::endl;
         }
 
@@ -52,6 +59,15 @@ void Game::render()
 {
     SDL_RenderClear(renderer);
     //AddStuffToRender
+    for(auto& InTex : TexToRender)
+    {
+        int texW = 500;
+        int texH = 500;
+        std::cout << "here" << std::endl;
+        SDL_QueryTexture(InTex, NULL, NULL, &texW, &texH);
+        SDL_Rect dstrect = { 0, 0, texW, texH };
+        SDL_RenderCopy(renderer, InTex, NULL, &dstrect);
+    }
     SDL_RenderPresent(renderer);
 }
 
@@ -75,6 +91,8 @@ void Game::clean()
 {
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
+    
+    TTF_Quit();
     SDL_Quit();
     std::cout << "Game Cleaned" << std::endl;
 }

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include <vector>
 #include "../Public/TJACourse.h"
 
@@ -37,6 +38,8 @@ class TJAMap
         string Genre;
 
         vector<TJACourse*> TJACourses;
+
+        void CreateRandomData();
         //----------------------------
 
         //Parsing Function
